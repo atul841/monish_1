@@ -154,7 +154,7 @@
         <div class="row g-4" id="productContainer"></div>
       </div>
     </section>
-<script>
+<!-- <script>
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
       const products = [
@@ -192,7 +192,51 @@
 
       renderProducts();
       updateCartCount();
-    </script>
+    </script> -->
+
+    <script>
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function updateCartCount() {
+    document.getElementById("cart-count").textContent = cart.length;
+  }
+
+  function renderProducts() {
+    const container = document.getElementById("productContainer");
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+
+    if (products.length === 0) {
+      container.innerHTML = "<p class='text-center'>No products available.</p>";
+      return;
+    }
+
+    container.innerHTML = products.map((product, index) => `
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="${product.image}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="${product.name}">
+          <div class="card-body">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-text">Type: ${product.type}</p>
+            <p class="card-text">Size: ${product.size}</p>
+            <p class="card-text">Price: ₹${product.price}</p>
+            <button class="btn btn-primary" onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function addToCart(product) {
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert(`${product.name} added to cart!`);
+  }
+
+  renderProducts();
+  updateCartCount();
+</script>
+
     <!-- Footer -->
     <footer class="bg-dark text-white pt-5 pb-3">
       <div class="container">

@@ -718,3 +718,88 @@ function updateChart(sold, returned) {
 
 showSection("dashboardSection");
 updateProductTable();
+
+
+// product add js
+
+
+  const productForm = document.getElementById("productForm");
+  const productTable = document.getElementById("productTable");
+  const preview = document.getElementById("preview");
+  const imageInput = document.getElementById("image");
+
+  // Image Preview
+  imageInput.addEventListener("change", function () {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Form Submit
+  productForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const file = imageInput.files[0];
+    if (!file) {
+      alert("Please select an image.");
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      const imageBase64 = e.target.result;
+
+      const newProduct = {
+        id: Date.now(),
+        name: document.getElementById("name").value,
+        type: document.getElementById("type").value,
+        price: parseFloat(document.getElementById("price").value),
+        size: document.getElementById("size").value,
+        quantity: parseInt(document.getElementById("quantity").value),
+        description: document.getElementById("description").value,
+        image: imageBase64
+      };
+
+      const products = JSON.parse(localStorage.getItem("products")) || [];
+      products.push(newProduct);
+      localStorage.setItem("products", JSON.stringify(products));
+      productForm.reset();
+      preview.src = "";
+      alert("Product saved successfully!");
+      renderProductTable();
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function renderProductTable() {
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    productTable.innerHTML = products.map((p, i) => `
+      <tr>
+        <td>${p.name}</td>
+        <td>${p.type}</td>
+        <td>₹${p.price}</td>
+        <td>${p.size}</td>
+        <td>${p.quantity}</td>
+        <td>${p.description}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" onclick="deleteProduct(${i})">Delete</button>
+        </td>
+      </tr>
+    `).join("");
+  }
+
+  function deleteProduct(index) {
+    const products = JSON.parse(localStorage.getItem("products")) || [];
+    products.splice(index, 1);
+    localStorage.setItem("products", JSON.stringify(products));
+    renderProductTable();
+  }
+
+  renderProductTable();
+
+

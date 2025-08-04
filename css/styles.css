@@ -255,14 +255,4 @@ footer i {
 
 
 
-.card {
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  border-radius: 10px;
-}
-.card-img-top {
-  object-fit: cover;
-  height: 200px;
-}
-.card-body {
-  text-align: center;
-}
+

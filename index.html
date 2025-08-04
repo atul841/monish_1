@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ShopX - Home</title>
+    <title>MonishShop - Home</title>
     <link rel="stylesheet" href="css/style.css" />
     <link
       rel="stylesheet"
@@ -15,10 +15,25 @@
     />
   </head>
   <body>
+    <style>
+   
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+    </style>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div class="container">
-        <a class="navbar-brand" href="#">ShopX</a>
+        <a class="navbar-brand" href="#">logo</a>
         <button
           class="navbar-toggler"
           data-bs-toggle="collapse"
@@ -38,7 +53,8 @@
               <a class="nav-link" href="cart.html">Cart</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="admin.html">Admin Login</a>
+              <a class="nav-link" href="admin.html">Admin
+                Login</a>
             </li>
             <li class="nav-item">
               <a class="nav-link position-relative" href="cart.html">
@@ -151,61 +167,51 @@
     <section class="py-5">
       <div class="container">
         <h2 class="mb-4 text-center">Featured Products</h2>
-        <div class="row g-4">
-          <div class="container my-4">
-            <div class="row" id="productContainer"></div>
-          </div>
-        </div>
+        <div class="row g-4" id="productContainer"></div>
       </div>
     </section>
 
     <script>
-  // Initialize cart from localStorage or create empty array
-  let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  // Function to update cart count badge
   function updateCartCount() {
-    const cartCount = document.getElementById("cart-count");
-    cartCount.textContent = cartItems.length;
+    document.getElementById("cart-count").textContent = cart.length;
   }
 
-  // Function to add item to cart
-  function addToCart(id, name, price, img) {
-    cartItems.push({ id, name, price, img });
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-    updateCartCount();
-    alert(`${name} added to cart!`);
-  }
-
-  // Call this after DOM is loaded to attach event listeners
-  document.addEventListener("DOMContentLoaded", function () {
-    updateCartCount();
-
-    // Example only: dynamically adding product cards from sample data (replace with real)
+  function renderProducts() {
+    const container = document.getElementById("productContainer");
     const products = JSON.parse(localStorage.getItem("products")) || [];
-    const productContainer = document.getElementById("productContainer");
 
-    if (productContainer) {
-      productContainer.innerHTML = products
-        .map((p, index) => {
-          return `
-            <div class="col-md-4 mb-4">
-              <div class="card h-100">
-                <img src="${p.image}" class="card-img-top" alt="${p.name}" />
-                <div class="card-body">
-                  <h5 class="card-title">${p.name}</h5>
-                  <p class="card-text">Price: ₹${p.price}</p>
-                  <a href="#" class="btn btn-outline-primary" onclick="addToCart(${index}, '${p.name}', ${p.price}, '${p.image}')">
-                    Add to Cart
-                  </a>
-                </div>
-              </div>
-            </div>
-          `;
-        })
-        .join("");
+    if (products.length === 0) {
+      container.innerHTML = "<p class='text-center'>No products available.</p>";
+      return;
     }
-  });
+
+    container.innerHTML = products.map((product, index) => `
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="${product.image}" class="card-img-top" style="height: 700px; object-fit: cover;" alt="${product.name}">
+          <div class="card-body">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-text">Type: ${product.type}</p>
+            <p class="card-text">Size: ${product.size}</p>
+            <p class="card-text">Price: ₹${product.price}</p>
+            <button class="btn btn-primary" onclick='addToCart(${JSON.stringify(product)})'>Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function addToCart(product) {
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    alert(`${product.name} added to cart!`);
+  }
+
+  renderProducts();
+  updateCartCount();
 </script>
 
     <!-- Footer -->
