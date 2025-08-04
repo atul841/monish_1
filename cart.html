@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cart - MyShop</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <a class="navbar-brand" href="index.html">MyShop</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Cart Section -->
+  
+  <!-- CHECKOUT SECTION -->
+  <div id="checkoutSection" class="container mt-4" style="display: none;">
+    <h2>Checkout</h2>
+    <form id="checkoutForm">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="Your Name" required />
+      </div>
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Your Email" required />
+      </div>
+      <button type="submit" class="btn btn-success">Place Order</button>
+    </form>
+  </div>
+
+  <!-- ORDER CONFIRMATION -->
+  <div id="orderConfirmation" class="container mt-4 text-success" style="display: none;">
+    <h3>✅ Your order has been placed successfully!</h3>
+  </div>
+ <script>
+    // let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+
+    function updateCheckoutUI() {
+      const checkoutItems = document.getElementById("checkoutItems");
+      const checkoutTotal = document.getElementById("checkoutTotal");
+
+      checkoutItems.innerHTML = "";
+      let total = 0;
+
+      cart.forEach((item) => {
+        const li = document.createElement("li");
+        li.className = "list-group-item d-flex justify-content-between align-items-center";
+        li.textContent = `${item.name} (₹${item.price})`;
+        checkoutItems.appendChild(li);
+        total += item.price;
+      });
+
+      checkoutTotal.textContent = total;
+    }
+
+    document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      cart = [];
+      localStorage.removeItem("cart");
+      updateCheckoutUI();
+      document.getElementById("checkoutForm").reset();
+      document.getElementById("orderConfirmation").style.display = "block";
+
+      setTimeout(() => {
+        document.getElementById("orderConfirmation").style.display = "none";
+        window.location.href = "index.html"; // Back to home
+      }, 3000);
+    });
+
+    updateCheckoutUI();
+  </script>
+
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    &copy; 2025 MyShop. All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const cartItemsContainer = document.getElementById("cart-items");
+    const subtotalSpan = document.getElementById("subtotal");
+    const totalSpan = document.getElementById("total");
+    const shippingCharge = 50;
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+      cartItemsContainer.innerHTML = "";
+      let subtotal = 0;
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `<p>Your cart is empty.</p>`;
+        subtotalSpan.textContent = 0;
+        totalSpan.textContent = 0;
+        return;
+      }
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        subtotal += itemTotal;
+
+        const card = document.createElement("div");
+        card.className = "card mb-3";
+        card.innerHTML = `
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="${item.img}" class="img-fluid rounded-start" alt="${item.name}"/>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${item.name}</h5>
+                <p class="card-text">Price: ₹${item.price}</p>
+                <p class="card-text">Quantity:
+                  <input type="number" value="${item.quantity}" min="1" data-index="${index}" class="form-control d-inline-block w-25 quantity-input" />
+                </p>
+                <button class="btn btn-sm btn-danger" data-index="${index}">Remove</button>
+              </div>
+            </div>
+          </div>
+        `;
+        cartItemsContainer.appendChild(card);
+      });
+
+      subtotalSpan.textContent = subtotal;
+      totalSpan.textContent = subtotal + shippingCharge;
+
+      attachEventListeners();
+    }
+
+    function attachEventListeners() {
+      // Quantity change
+      document.querySelectorAll(".quantity-input").forEach(input => {
+        input.addEventListener("change", function () {
+          const index = this.dataset.index;
+          const value = parseInt(this.value);
+          if (value >= 1) {
+            cart[index].quantity = value;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            renderCart();
+          }
+        });
+      });
+
+      // Remove item
+      document.querySelectorAll(".btn-danger").forEach(button => {
+        button.addEventListener("click", function () {
+          const index = this.dataset.index;
+          cart.splice(index, 1);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          renderCart();
+        });
+      });
+    }
+
+    renderCart();
+  </script>
+  <script>
+    
+  </script>
+</body>
+</html>

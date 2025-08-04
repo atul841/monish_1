@@ -1,0 +1,139 @@
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  position: fixed;
+}
+.page-content {
+  margin-left: 250px;
+  padding: 20px;
+  width: 100%;
+}
+@media(max-width: 768px) {
+  .sidebar { position: relative; width: 100%; }
+  .page-content { margin-left: 0; }
+}
+
+/* Image preview styling */
+#preview {
+  max-height: 100px;
+  max-width: 100%;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* Product image in table */
+#productTable img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+
+
+
+.sidebar {
+  width: 220px;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex-grow: 1;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  #salesChart {
+    max-width: 100%;
+  }
+}
+
+
+#profileSection label {
+  font-weight: 500;
+  color: #333;
+}
+#profileSection h2 {
+  color: #3a3a3a;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 10px;
+}
+#profilePreview {
+  border: 3px solid #007bff;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* chat section css */
+.chat-message {
+    padding: 8px 12px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    max-width: 75%;
+    word-wrap: break-word;
+    font-size: 15px;
+  }
+  .chat-left {
+    background-color: #e4e6eb;
+    align-self: flex-start;
+  }
+  .chat-right {
+    background-color: #007bff;
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+  }
+  #chatBox {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* chat section end */
+  
+
+  .graph-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center all chart boxes */
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.chart-box {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+  margin: 0 auto; /* Center horizontally */
+}
+
+.chart-box h5 {
+  margin-bottom: 0.75rem;
+}
+
+#graphSection {
+  padding: 1rem;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Mobile view optimization */
+@media (max-width: 768px) {
+  .chart-box {
+    width: 90%;
+  }
+}
+
+

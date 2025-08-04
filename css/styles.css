@@ -1,0 +1,268 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.card-title {
+  font-weight: 600;
+}
+/* ===== GENERAL RESET ===== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #ffffff;
+  margin-right: 10px;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #ffc107;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: #343a40;
+  color: #ffffff;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+  background: linear-gradient(to right, #6c63ff, #7268f0);
+  color: #fff;
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.hero-section h1 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.hero-section p {
+  font-size: 1.2rem;
+}
+
+/* ===== PRODUCT CARD ===== */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+  background-color: #fff;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+  border-radius: 10px 10px 0 0;
+}
+
+.product-card .card-body {
+  padding: 1rem;
+}
+
+.product-card h5 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary,
+.btn-success,
+.btn-danger {
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 5px;
+}
+
+.btn-primary:hover {
+  background-color: #4b4bea;
+}
+
+.btn-success:hover {
+  background-color: #28a745cc;
+}
+
+/* ===== FORM INPUTS ===== */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #6c63ff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+}
+
+/* ===== CART PAGE ===== */
+.cart-item {
+  border-bottom: 1px solid #ddd;
+  padding: 1rem 0;
+}
+
+.cart-item img {
+  width: 80px;
+  height: auto;
+}
+
+.cart-summary {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.cart-summary h5 {
+  font-weight: bold;
+}
+
+/* ===== CHECKOUT PAGE ===== */
+.checkout-form input {
+  margin-bottom: 10px;
+}
+
+/* ===== SUCCESS PAGE ===== */
+.success-message {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.success-message h2 {
+  color: #28a745;
+  font-size: 2rem;
+}
+
+.success-message p {
+  font-size: 1.1rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .product-card {
+    margin-bottom: 1rem;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
+
+
+.hero-section {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-item {
+  height: 100vh;
+}
+
+.carousel-bg {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  filter: brightness(0.5);
+}
+
+.carousel-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  height: 100%;
+  width: 100%;
+  padding: 0 20px;
+}
+
+/* footer the section in the brond the name bank  */
+
+footer {
+  background-color: #111;
+  color: #aaa;
+  font-size: 14px;
+}
+
+footer h5, .footer-heading {
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.footer-heading::after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: #e74c3c;
+  margin-top: 6px;
+}
+
+footer ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+footer ul li {
+  margin-bottom: 8px;
+  color: #ccc;
+}
+
+footer ul li:hover {
+  color: #fff;
+  cursor: pointer;
+}
+
+footer p {
+  margin-bottom: 8px;
+}
+
+footer i {
+  color: #e74c3c;
+}
+
+
+
+
+
+.card {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+.card-img-top {
+  object-fit: cover;
+  height: 200px;
+}
+.card-body {
+  text-align: center;
+}
